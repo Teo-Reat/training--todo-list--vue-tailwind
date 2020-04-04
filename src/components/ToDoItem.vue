@@ -1,12 +1,11 @@
 <template>
-    <li>
-        <div>
-            <input type="checkbox" @change="todo.completed = !todo.completed">
-            <strong class="font-style">{{ index + 1 }}</strong>:
-            <span class="font-style" :class="{done: todo.completed}">{{ todo.title }}</span>
-        </div>
-        <div>
-            <button @click="$emit('delete-todo', todo.id)">&times;</button>
+    <li @click.prevent="todo.completed = !todo.completed"
+        @click.right.prevent="$emit('delete-todo', todo.id)"
+        class="cursor-pointer text-blue-900 text-xl px-4 py-2 mt-2 rounded"
+        :class="{'bg-green-200': todo.completed, 'bg-blue-200': !todo.completed }">
+        <div class="flex justify-between">
+            <span class="nselect ml-2 text-blue-900"><strong>{{ index + 1 }}. </strong>{{ todo.title }}</span>
+            <i class="fas fa-check-circle"></i>
         </div>
     </li>
 </template>
@@ -30,15 +29,13 @@
 </script>
 
 <style scoped>
-    li {
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 20px;
-    }
     .done {
         text-decoration: line-through;
     }
-    .font-style {
-        font-size: 26px;
+    .nselect::selection {
+        background: transparent;
+    }
+    .nselect::-moz-selection {
+        background: transparent;
     }
 </style>

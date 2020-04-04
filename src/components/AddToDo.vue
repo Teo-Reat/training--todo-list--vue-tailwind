@@ -1,7 +1,15 @@
 <template>
-    <form>
-        <input type="text" v-model="newTodo">
-        <button type="submit" @click.prevent="addToDo()">Add ToDo</button>
+    <form class="w-3/5 mx-auto flex justify-center mb-6 text-xl">
+        <input type="text"
+               v-model="newTodo"
+               placeholder="New to do item..."
+               class="bg-green-200 box-border py-2 px-4 rounded-l flex-grow min-w-0">
+        <button class="bg-green-400 hover:bg-green-600 active:bg-green-900 text-white font-bold py-2 px-4
+        rounded-r flex-shrink-0"
+                type="submit"
+                @click.prevent="addToDo()">
+            Add Item
+        </button>
     </form>
 </template>
 
@@ -22,21 +30,5 @@
 </script>
 
 <style scoped>
-    form {
-        display: block;
-        margin: 30px auto 40px;
-        width: 600px;
 
-    }
-    input,
-    button {
-        padding: 10px 20px;
-        box-sizing: border-box;
-    }
-    input {
-        width: 70%;
-    }
-    button {
-        width: 30%;
-    }
 </style>

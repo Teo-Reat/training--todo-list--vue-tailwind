@@ -1,18 +1,8 @@
 <template>
-    <div id="app">
-        <h1>ToDo Application</h1>
-        <hr>
+    <div id="app" class="container mx-auto my-12">
+        <h1 class="text-center text-blue-900 text-4xl border-b-8 border-green-400 mb-6 font-extrabold">ToDo Application</h1>
         <router-view></router-view>
     </div>
 </template>
 
-<style>
-    #app {
-        width: 960px;
-        margin: 0 auto;
-        padding: 40px 20px;
-    }
-    h1 {
-        text-align: center;
-    }
-</style>
+<style src="./assets/tailwind.css"/>
