@@ -1,8 +1,8 @@
 <template>
-    <form class="w-3/5 mx-auto flex justify-center mb-6 text-xl">
+    <form class="w-3/5 mx-auto flex justify-center mb-6 text-xl shadow">
         <input type="text"
                v-model="newTodo"
-               placeholder="New to do item..."
+               placeholder='New "ToDo" item...'
                class="bg-green-200 box-border py-2 px-4 rounded-l flex-grow min-w-0">
         <button class="bg-green-400 hover:bg-green-600 active:bg-green-900 text-white font-bold py-2 px-4
         rounded-r flex-shrink-0"
@@ -22,8 +22,12 @@
         },
         methods: {
             addToDo() {
-                this.$emit('add-todo', this.newTodo);
-                this.newTodo = '';
+                if (this.newTodo !== '') {
+                    this.$emit('add-todo', this.newTodo);
+                    this.newTodo = '';
+                } else {
+                    this.newTodo = 'Type some text here :)'
+                }
             }
         }
     }

@@ -7,10 +7,26 @@
             </button>
         </router-link>
         <add-to-do @add-todo="addToDo"></add-to-do>
+        <div class="w-3/5 mx-auto text-xl my-6">
+            <div class="inline-block relative">
+                <select class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500
+            px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline bg-green-200
+            text-blue-900"
+                        v-model="filter">
+                    <option>All</option>
+                    <option>Completed</option>
+                    <option>Uncompleted</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                </div>
+        </div>
+        </div>
         <loader v-if="loading"></loader>
-        <to-do-list :todos="todos" @delete-todo="deleteToDo" v-else-if="todos.length"></to-do-list>
+        <to-do-list :todos="filteredToDos" @delete-todo="deleteToDo" v-else-if="filteredToDos.length"></to-do-list>
         <h3 class="px-4 py-2 w-3/5 mx-auto uppercase tracking-wide font-semibold text-center bg-green-200
-        rounded text-blue-900 my-2" v-show="!todos.length">No current assignments</h3>
+        rounded text-blue-900 my-2" v-show="!filteredToDos.length">No current assignments</h3>
     </div>
 </template>
 
@@ -28,7 +44,8 @@
         data() {
             return {
                 todos: [],
-                loading: true
+                loading: true,
+                filter: 'All'
             }
         },
         mounted() {
@@ -45,6 +62,17 @@
             },
             addToDo(data) {
                 this.todos.unshift({id: this.Date, title: data, completed: false});
+            }
+        },
+        computed: {
+            filteredToDos() {
+                if (this.filter === 'All') {
+                    return this.todos
+                } else if (this.filter === 'Completed') {
+                    return this.todos.filter(t => t.completed)
+                } else {
+                    return this.todos.filter(t => !t.completed)
+                }
             }
         }
     }
